@@ -370,6 +370,11 @@ BlazeComponent.extendComponent({
             this.data().setRequestedBy('');
           }
         },
+        'click .js-delete': Popup.afterConfirm('cardDelete', function() {
+          Popup.close();
+          Cards.remove(this._id);
+          Utils.goBoardId(this.boardId);
+        }),
         'click .js-go-to-linked-card'() {
           Utils.goCardId(this.data().linkedId);
         },

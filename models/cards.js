@@ -754,6 +754,15 @@ Cards.helpers({
     return this.isLinkedCard() || this.isLinkedBoard();
   },
 
+  isDangling() {
+    if (this.isLinkedCard()) {
+      return !Cards.findOne({ _id: this.linkedId });
+    } else if (this.isLinkedBoard()) {
+      return !Boards.findOne({ _id: this.linkedId });
+    }
+    return false;
+  },
+
   setDescription(description) {
     if (this.isLinkedCard()) {
       return Cards.update({ _id: this.linkedId }, { $set: { description } });
